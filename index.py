@@ -22,7 +22,7 @@ for line in user_pass_file:
 total_user = total_user - 1
 
 def main_flow(id, driver, username, password ):
-    # action = ActionChains(driver)
+    # action = ActionChains(driver)e
     delay = int(setting['delay'])
     time.sleep(delay*id)
     # # Main Automation
