@@ -1,0 +1,6 @@
+delay = 5
+new_group_name = playo3
+activity = Cool
+concurrent = 2
+phone_login = no
+grp_delay = 3
