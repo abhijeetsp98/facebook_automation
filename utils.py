@@ -44,11 +44,11 @@ def join_grp_and_return_name(driver, group_id, delay, username):
                 temp = username + "Join Group "+ group_id
         except:   
             print(grp_name,"Grp already joined")
-            temp = username + "Already joined Group "+ group_id
-        grp_name = grp_name.replace(' ','')
-        return temp
+            username = username.replace("\n","")
+            temp = username + " Already joined Group "+ group_id
+        return grp_name
     except:
-        temp = username + "Group is private"+ group_id
+        temp = username + "Group is private "+ group_id
         return temp
 
 def logout(driver, delay):

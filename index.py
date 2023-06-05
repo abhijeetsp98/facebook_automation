@@ -54,13 +54,14 @@ def main_flow(id, driver, username, password ):
             driver.find_element(By.XPATH,"//span[text()='Public']").click()
             time.sleep(delay)
             driver.find_element(By.XPATH,"//span[text()='Create']").click()
-            print('Done creating and generating link')
+            print('Done creating group')
         except Exception:
             print('Failed Creating group and generating link')
             pass
         try:
             time.sleep(delay)
             viral_link = utils.create_link(driver, delay, setting)
+            print(viral_link)
         except:
             print("Link creation failed")
         try:
@@ -80,10 +81,13 @@ def main_flow(id, driver, username, password ):
                     driver.find_element(By.XPATH,"//span[text()='Share']").click()
                     time.sleep(delay)
                     driver.find_element(By.XPATH,"//span[text()='Share to a group']").click()
-                    time.sleep(delay)
                     element_share = "//span[text()='" + group_name + "']"
+                    print(element_share)
+                    time.sleep(delay)
                     driver.find_element(By.XPATH,element_share).click()
                     time.sleep(delay)
+                    driver.find_element(By.XPATH,"//span[text()='Post']").click()
+                    time.sleep(delay*2)
                 except:
                     print("Not able to share the link to grp")
                 with open("my_file.txt", "a") as my_file:
