@@ -1,6 +1,7 @@
 delay = 5
-new_group_name = Salman
-activity = Cool
+new_group_name = Emma
+activity = Watching...
+activity_subject =Harry Potter
 concurrent = 2
 phone_login = no
 grp_delay = 3

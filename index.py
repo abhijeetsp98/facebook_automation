@@ -9,8 +9,12 @@ from multiprocessing import Process
 setting_file = open("_settings.txt", "r")
 setting = {}
 for line in setting_file:
-    value = line.split('=')[1].replace("\n","").replace(' ',"")
-    setting[line.split('=')[0].replace(' ',"")] = value.replace(' ',"")
+    if line.split('=')[0].replace(' ',"") != 'activity_subject':
+        value = line.split('=')[1].replace("\n","").replace(' ',"")
+        setting[line.split('=')[0].replace(' ',"")] = value.replace(' ',"")
+    else:
+        value = line.split('=')[1].replace("\n","")
+        setting[line.split('=')[0].replace(' ',"")] = value
 
 # read username and password
 user_pass_file = open("_userid_pass.txt", "r")
@@ -82,7 +86,6 @@ def main_flow(id, driver, username, password ):
                     time.sleep(delay)
                     driver.find_element(By.XPATH,"//span[text()='Share to a group']").click()
                     element_share = "//span[text()='" + group_name + "']"
-                    print(element_share)
                     time.sleep(delay)
                     driver.find_element(By.XPATH,element_share).click()
                     time.sleep(delay)
@@ -93,26 +96,28 @@ def main_flow(id, driver, username, password ):
                         username_field = driver.find_element(By.XPATH,"//div[@aria-label='Create a public post…']")
                         username_field.send_keys(data)
                         time.sleep(delay)
-                        # driver.find_element(By.XPATH,"//div[@aria-label='Feeling/activity']").click()
-                        # time.sleep(delay)
-                        # driver.find_element(By.XPATH,"//span[text()='Activities']").click()
-                        # time.sleep(delay)
-                        # driver.find_element(By.XPATH,"//input[@aria-label='Activity']").send_keys("harry")
-                        # time.sleep(delay)
-                        # driver.find_element(By.XPATH,"//span[text()='Harry Potter']").click()
-                        # time.sleep(delay)
+                        driver.find_element(By.XPATH,"//div[@aria-label='Feeling/activity']").click()
+                        time.sleep(delay)
+                        driver.find_element(By.XPATH,"//div[@aria-selected='false' and @class='x1i10hfl x6umtig x1b1mbwd xaqea5y xav7gou xe8uvvx xggy1nq x1o1ewxj x3x9cwd x1e5q0jg x13rtm0m x87ps6o x1lku1pv x1a2a7pz xjyslct xjbqb8w x18o3ruo x13fuv20 xu3j5b3 x1q0q8m5 x26u7qi x972fbf xcfux6l x1qhh985 xm0m39n x9f619 x1heor9g x1ypdohk xdj266r x11i5rnm xat24cr x1mh8g0r xexx8yu x4uap5 x18d9i69 xkhd6sd x1n2onr6 x16tdsg8 x1hl2dhg x1vjfegm x3nfvp2 xrbpyxo xng8ra x16dsc37'] ").click()
+                        time.sleep(delay)
+                        driver.find_element(By.XPATH,"//input[@aria-label='Activity']").send_keys(setting['activity'])
+                        time.sleep(delay)
+                        driver.find_element(By.XPATH,"//span[text()='"+ setting['activity'] +"']").click()
+                        time.sleep(delay)
+                        driver.find_element(By.XPATH,"//input[@aria-label='Activity']").send_keys(setting['activity_subject'])
+                        time.sleep(delay)
+                        driver.find_element(By.XPATH,"//span[text()='"+ setting['activity_subject'] +"']").click()
+                        time.sleep(delay)
                     except:
                         print("Fail to set activity")
-
-
                     driver.find_element(By.XPATH,"//span[text()='Post']").click()
                     time.sleep(delay*2)
+                    print("Activity applied successfully")
                 except:
                     print("Not able to share the link to grp")
-                with open("my_file.txt", "a") as my_file:
-                    my_file.write(group_name) 
-                print(group_name)
-            time.sleep(9999)
+                # with open("my_file.txt", "a") as my_file:
+                #     my_file.write(group_name) 
+                # print(group_name)
         except:
             print('Failed sharing link execution')
             time.sleep(9999)
@@ -145,6 +150,7 @@ def get(id, Driver):
 
 if __name__ == '__main__':
     num = min(num, total_user)
+    num = 1
     for i in range(num):
         process[i] = Process(target=get, args = [i, webdriver.Chrome])
         process[i].start()
