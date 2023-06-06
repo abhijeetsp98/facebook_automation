@@ -1,5 +1,5 @@
 delay = 5
-new_group_name = playo3
+new_group_name = Salman
 activity = Cool
 concurrent = 2
 phone_login = no

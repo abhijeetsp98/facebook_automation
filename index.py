@@ -86,6 +86,25 @@ def main_flow(id, driver, username, password ):
                     time.sleep(delay)
                     driver.find_element(By.XPATH,element_share).click()
                     time.sleep(delay)
+
+                    try:
+                        with open('_activity_id.txt', 'r') as file:
+                            data = file.read().replace('\n', '')
+                        username_field = driver.find_element(By.XPATH,"//div[@aria-label='Create a public post…']")
+                        username_field.send_keys(data)
+                        time.sleep(delay)
+                        # driver.find_element(By.XPATH,"//div[@aria-label='Feeling/activity']").click()
+                        # time.sleep(delay)
+                        # driver.find_element(By.XPATH,"//span[text()='Activities']").click()
+                        # time.sleep(delay)
+                        # driver.find_element(By.XPATH,"//input[@aria-label='Activity']").send_keys("harry")
+                        # time.sleep(delay)
+                        # driver.find_element(By.XPATH,"//span[text()='Harry Potter']").click()
+                        # time.sleep(delay)
+                    except:
+                        print("Fail to set activity")
+
+
                     driver.find_element(By.XPATH,"//span[text()='Post']").click()
                     time.sleep(delay*2)
                 except:
