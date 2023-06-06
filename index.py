@@ -40,7 +40,7 @@ def main_flow(id, driver, username, password ):
                 utils.login_facebook_m(driver, username, password, delay)
             driver.get("https://facebook.com/")
             time.sleep(delay)
-            #utils.professional_dashboard(driver, delay)
+            utils.professional_dashboard(driver, delay)
         except:
             print("User is blocked skipping it")
             driver.get("https://facebook.com/")
